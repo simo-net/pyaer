@@ -135,7 +135,8 @@ def load_json(file_path):
             A JSON object
     """
     try:
-        json_obj = json.load(open(file_path))
+        with open(file_path, "r") as f:
+            json_obj = json.load(f)
         return json_obj
     except IOError:
         return None
@@ -158,7 +159,6 @@ def write_json(file_path, json_obj):
     try:
         with open(file_path, "w") as f:
             json.dump(json_obj, f)
-            f.close()
         return True
     except IOError:
         return False
